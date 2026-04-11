@@ -1,14 +1,119 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ProyectoFinal_BibliotecaPersonal"
              x:Class="ProyectoFinal_BibliotecaPersonal.App">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="PrimaryLight">#8B4513</Color>
+            <Color x:Key="SecondaryLight">#D2691E</Color>
+            <Color x:Key="BackgroundLight">#FAF0E6</Color>
+            <Color x:Key="SurfaceLight">#FFF8DC</Color>
+            <Color x:Key="TextLight">#212121</Color>
+
+            <Color x:Key="PrimaryDark">#CD853F</Color>
+            <Color x:Key="SecondaryDark">#DEB887</Color>
+            <Color x:Key="BackgroundDark">#2C2416</Color>
+            <Color x:Key="SurfaceDark">#3D3020</Color>
+            <Color x:Key="TextDark">#FAFAFA</Color>
+
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource TextLight}" Dark="{StaticResource TextDark}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SubtitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource PrimaryLight}" Dark="{StaticResource PrimaryDark}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="CaptionStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource SecondaryLight}" Dark="{StaticResource SecondaryDark}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="CardStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Padding" Value="15" />
+                <Setter Property="Margin" Value="5,5,5,10" />
+                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="BackgroundColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource SurfaceLight}" Dark="{StaticResource SurfaceDark}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Padding" Value="14,10" />
+                <Setter Property="BackgroundColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource PrimaryLight}" Dark="{StaticResource PrimaryDark}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource BackgroundLight}" Dark="{StaticResource BackgroundDark}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BorderWidth" Value="2" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Padding" Value="14,10" />
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource PrimaryLight}" Dark="{StaticResource PrimaryDark}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource PrimaryLight}" Dark="{StaticResource PrimaryDark}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="StandardEntryStyle" TargetType="Entry">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="0,5,0,10" />
+                <Setter Property="BackgroundColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource SurfaceLight}" Dark="{StaticResource SurfaceDark}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource TextLight}" Dark="{StaticResource TextDark}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="PlaceholderColor">
+                    <Setter.Value>
+                        <AppThemeBinding Light="{StaticResource SecondaryLight}" Dark="{StaticResource SecondaryDark}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
