@@ -8,7 +8,7 @@ namespace ProyectoFinal_BibliotecaPersonal.Services
     public class BookApiService
     {
         private readonly HttpClient _httpClient;
-        private readonly DatabaseService _database; // Servicio de Xavier (clase concreta, sin interfaz)
+        private readonly DatabaseService _database; 
 
         private static readonly JsonSerializerOptions _jsonOptions = new()
         {

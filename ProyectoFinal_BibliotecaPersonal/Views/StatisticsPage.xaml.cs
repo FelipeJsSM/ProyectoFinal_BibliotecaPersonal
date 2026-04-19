@@ -1,34 +1,37 @@
-using System.Collections.Generic;
-using Microsoft.Maui.Controls;
+using ProyectoFinal_BibliotecaPersonal.ViewModels;
 using ProyectoFinal_BibliotecaPersonal.Drawables;
 
 namespace ProyectoFinal_BibliotecaPersonal.Views;
 
 public partial class StatisticsPage : ContentPage
 {
-	public StatisticsPage()
-	{
-		InitializeComponent();
-        CargarEstadisticas();
-	}
+    private readonly StatisticsViewModel _viewModel;
 
-    private void CargarEstadisticas()
+    public StatisticsPage(StatisticsViewModel viewModel)
     {
-        var drawable = (StatisticsDrawable)graphicsView.Drawable;
+        InitializeComponent();
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
+    }
 
-        drawable.TotalBooks = 50;
-        drawable.ReadBooks = 35;
-        drawable.UnreadBooks = 15;
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
 
-        drawable.BooksByGenre = new Dictionary<string, int>
+        try
         {
-            { "Fantasía", 10 },
-            { "C.Ficción", 8 },
-            { "Terror", 5 },
-            { "Romance", 12 },
-            { "Historia", 15 }
-        };
-
-        graphicsView.Invalidate();
+            await _viewModel.LoadStatisticsAsync();
+            var drawable = (StatisticsDrawable)graphicsView.Drawable;
+            drawable.TotalBooks = _viewModel.TotalLibros;
+            drawable.ReadBooks = _viewModel.Leidos;
+            drawable.UnreadBooks = _viewModel.Pendientes;
+            drawable.BooksByGenre = _viewModel.LibrosPorGenero;
+            graphicsView.Invalidate();
+        }
+        catch (Exception ex)
+        {
+            // Esto atrapará si el GraphicsView o la base de datos están fallando
+            await DisplayAlert("Error Oculto en Estadísticas", ex.Message, "OK");
+        }
     }
 }

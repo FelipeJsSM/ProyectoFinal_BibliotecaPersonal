@@ -40,7 +40,8 @@
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
 
-                            <Button Grid.Column="2" Text="Ver" Style="{StaticResource SecondaryButtonStyle}" VerticalOptions="Center"/>
+                            <Button Grid.Column="2" Text="Ver" Style="{StaticResource SecondaryButtonStyle}" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewBookCommand}"
+                                    CommandParameter="{Binding .}"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>

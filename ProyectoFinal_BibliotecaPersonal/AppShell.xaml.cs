@@ -9,6 +9,7 @@ namespace ProyectoFinal_BibliotecaPersonal
             InitializeComponent();
             Routing.RegisterRoute(nameof(BookDetailPage), typeof(BookDetailPage));
             Routing.RegisterRoute(nameof(AddBookPage), typeof(AddBookPage));
+
         }
     }
 }
