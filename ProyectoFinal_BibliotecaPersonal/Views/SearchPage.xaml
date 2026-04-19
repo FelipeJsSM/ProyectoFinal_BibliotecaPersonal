@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinal_BibliotecaPersonal.Views.SearchPage"
+             Title="Buscar en Google Books"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <Grid RowDefinitions="Auto, *">
+        <SearchBar Grid.Row="0" 
+                   Placeholder="Buscar por título o autor..."
+                   Text="{Binding SearchQuery}"
+                   SearchCommand="{Binding SearchCommand}"
+                   Margin="10" />
+
+        <ActivityIndicator Grid.Row="1" 
+                           IsRunning="{Binding IsBusy}" 
+                           IsVisible="{Binding IsBusy}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"/>
+
+        <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding SearchResults}" 
+                        Margin="10,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Style="{StaticResource CardStyle}">
+                        <Grid ColumnDefinitions="80, *, Auto" ColumnSpacing="15">
+                            <Image Grid.Column="0" Source="{Binding CoverUrl}" Aspect="AspectFill" HeightRequest="110" WidthRequest="80" />
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="{Binding Title}" Style="{StaticResource SubtitleStyle}" MaxLines="2" LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding Author}" Style="{StaticResource CaptionStyle}"/>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="2" 
+                                    Text="Agregar" 
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddBookCommand}"
+                                    CommandParameter="{Binding .}"
+                                    VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
