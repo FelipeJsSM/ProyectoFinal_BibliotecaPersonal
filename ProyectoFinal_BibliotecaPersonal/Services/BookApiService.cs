@@ -32,7 +32,7 @@ namespace ProyectoFinal_BibliotecaPersonal.Services
             maxResults = Math.Clamp(maxResults, 1, 40);
 
             var encodedQuery = Uri.EscapeDataString(query);
-            var requestUrl = $"volumes?q={encodedQuery}&maxResults={maxResults}";
+            var requestUrl = $"volumes?q={encodedQuery}&maxResults={maxResults}&key=AIzaSyBgD0yRyOVsfcrFIdCbXI9teJ5hBQ_saqA";
 
             try
             {
@@ -45,7 +45,6 @@ namespace ProyectoFinal_BibliotecaPersonal.Services
                 if (searchResult?.Items is null || searchResult.Items.Count == 0)
                     return new List<Book>();
 
-                // mapear al modelo Book de Xavier
                 return searchResult.Items
                     .Select(MapToBook)
                     .ToList();
@@ -67,7 +66,7 @@ namespace ProyectoFinal_BibliotecaPersonal.Services
             if (string.IsNullOrWhiteSpace(googleBooksId))
                 return null;
 
-            var response = await _httpClient.GetAsync($"volumes/{googleBooksId}", ct);
+            var response = await _httpClient.GetAsync($"volumes/{googleBooksId}?key=AIzaSyBgD0yRyOVsfcrFIdCbXI9teJ5hBQ_saqA", ct);
             if (!response.IsSuccessStatusCode)
                 return null;
 
@@ -134,7 +133,6 @@ namespace ProyectoFinal_BibliotecaPersonal.Services
             };
         }
 
-        // --- Helpers de mapeo ---
 
         private static string? ExtractIsbn(List<IndustryIdentifier>? identifiers)
         {
