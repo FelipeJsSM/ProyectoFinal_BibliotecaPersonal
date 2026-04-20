@@ -40,12 +40,16 @@
                 <Label Text="Ya leí este libro" VerticalOptions="Center" TextColor="{DynamicResource TextColor}"/>
             </HorizontalStackLayout>
 
+            <Label Text="{Binding Source={x:Reference RatingSlider}, Path=Value, StringFormat='Calificación: {0:F0} estrellas'}" Style="{StaticResource CaptionStyle}" Margin="0,10,0,0"/>
+            <Slider x:Name="RatingSlider" Minimum="1" Maximum="5" Value="{Binding Book.Rating}" MinimumTrackColor="{DynamicResource PrimaryColor}" />
+
             <Label Text="Mis Notas" Style="{StaticResource CaptionStyle}" Margin="0,10,0,0"/>
             <Editor Text="{Binding Book.Notes}" HeightRequest="100" BackgroundColor="{DynamicResource SurfaceColor}" TextColor="{DynamicResource TextColor}"/>
 
-            <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,20,0,0">
-                <Button Grid.Column="0" Text="Guardar" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButtonStyle}"/>
-                <Button Grid.Column="1" Text="Eliminar" Style="{StaticResource SecondaryButtonStyle}" TextColor="Red" BorderColor="Red"/>
+            <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10" Margin="0,20,0,20">
+                <Button Grid.Column="0" Text="Guardar" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButtonStyle}" FontSize="12"/>
+                <Button Grid.Column="1" Text="Eliminar" Command="{Binding DeleteCommand}" Style="{StaticResource SecondaryButtonStyle}" TextColor="Red" BorderColor="Red" FontSize="12"/>
+                <Button Grid.Column="2" Text="Cancelar" Command="{Binding CancelCommand}" Style="{StaticResource SecondaryButtonStyle}" FontSize="12"/>
             </Grid>
 
         </VerticalStackLayout>

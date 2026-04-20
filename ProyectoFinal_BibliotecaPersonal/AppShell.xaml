@@ -20,4 +20,8 @@
         <ShellContent Route="statistics" ContentTemplate="{DataTemplate views:StatisticsPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Agregar Libro" Icon="add.png">
+        <ShellContent Route="addbook" ContentTemplate="{DataTemplate views:AddBookPage}" />
+    </FlyoutItem>
+
 </Shell>

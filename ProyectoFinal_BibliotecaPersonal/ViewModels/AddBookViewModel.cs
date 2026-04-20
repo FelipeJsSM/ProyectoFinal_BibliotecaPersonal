@@ -4,8 +4,7 @@ using ProyectoFinal_BibliotecaPersonal.Services;
 
 namespace ProyectoFinal_BibliotecaPersonal.ViewModels
 {
-    [QueryProperty(nameof(Book), "Book")]
-    public class BookDetailViewModel : BindableObject
+    public class AddBookViewModel : BindableObject
     {
         private readonly DatabaseService _database;
         private Book _book;
@@ -17,17 +16,16 @@ namespace ProyectoFinal_BibliotecaPersonal.ViewModels
         }
 
         public ICommand SaveCommand { get; }
-        public ICommand DeleteCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public BookDetailViewModel(DatabaseService database)
+        public AddBookViewModel(DatabaseService database)
         {
             _database = database;
+            // ¡CRÍTICO! Inicializamos un libro vacío en blanco
             Book = new Book();
 
             SaveCommand = new Command(async () => await SaveBookAsync());
             CancelCommand = new Command(async () => await Shell.Current.GoToAsync(".."));
-            DeleteCommand = new Command(async () => await DeleteBookAsync());
         }
 
         private async Task SaveBookAsync()
@@ -40,20 +38,9 @@ namespace ProyectoFinal_BibliotecaPersonal.ViewModels
 
             await _database.SaveBookAsync(Book);
 
-            await Application.Current.MainPage.DisplayAlert("Éxito", "Libro guardado correctamente", "OK");
+            await Application.Current.MainPage.DisplayAlert("Éxito", "Libro agregado a tu biblioteca", "OK");
+
             await Shell.Current.GoToAsync("..");
         }
-
-        private async Task DeleteBookAsync()
-        {
-            bool answer = await Application.Current.MainPage.DisplayAlert("Confirmar", "¿Estás seguro de que deseas eliminar este libro?", "Sí, eliminar", "No");
-            if (answer)
-            {
-                await _database.DeleteBookAsync(Book);
-                await Shell.Current.GoToAsync("..");
-            }
-        }
-
-
     }
 }

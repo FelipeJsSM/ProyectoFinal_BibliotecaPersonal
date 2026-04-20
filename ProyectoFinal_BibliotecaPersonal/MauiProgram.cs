@@ -30,11 +30,13 @@ namespace ProyectoFinal_BibliotecaPersonal
             builder.Services.AddTransient<BookDetailViewModel>();
             builder.Services.AddTransient<SearchViewModel>();
             builder.Services.AddTransient<StatisticsViewModel>();
+            builder.Services.AddTransient<AddBookViewModel>();
 
             builder.Services.AddTransient<LibraryPage>();
             builder.Services.AddTransient<BookDetailPage>();
             builder.Services.AddTransient<SearchPage>();
             builder.Services.AddTransient<StatisticsPage>();
+            builder.Services.AddTransient<AddBookPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

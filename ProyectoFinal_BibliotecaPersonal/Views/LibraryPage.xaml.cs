@@ -22,7 +22,6 @@ public partial class LibraryPage : ContentPage
         }
         catch (Exception ex)
         {
-            // Esto hará que el error oculto salte a la pantalla
             await DisplayAlert("Error Oculto en Biblioteca", ex.Message, "OK");
         }
     }

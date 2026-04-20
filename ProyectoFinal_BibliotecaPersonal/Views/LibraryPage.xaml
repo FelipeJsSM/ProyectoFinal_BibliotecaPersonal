@@ -5,13 +5,30 @@
              Title="Mi Biblioteca"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
-    <Grid RowDefinitions="Auto, *">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar +" Command="{Binding AddBookCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *">
 
         <SearchBar Grid.Row="0" 
                    Placeholder="Buscar por título o autor..." 
+                   Text="{Binding SearchText}"
+                   SearchCommand="{Binding SearchCommand}"
                    Margin="10" />
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Books}" Margin="10,0">
+        <HorizontalStackLayout Grid.Row="1" Spacing="10" HorizontalOptions="Center" Margin="0,5">
+            <Button Text="Todos" Command="{Binding FilterCommand}" CommandParameter="All" Style="{StaticResource SecondaryButtonStyle}" HeightRequest="40"/>
+            <Button Text="Leídos" Command="{Binding FilterCommand}" CommandParameter="Read" Style="{StaticResource SecondaryButtonStyle}" HeightRequest="40"/>
+            <Button Text="Pendientes" Command="{Binding FilterCommand}" CommandParameter="Unread" Style="{StaticResource SecondaryButtonStyle}" HeightRequest="40"/>
+        </HorizontalStackLayout>
+
+        <Picker Grid.Row="2" Title="Filtrar por género" 
+                ItemsSource="{Binding Genres}" 
+                SelectedItem="{Binding SelectedGenre}"
+                Margin="10,5" />
+
+        <CollectionView Grid.Row="3" ItemsSource="{Binding Books}" Margin="10,0">
 
             <CollectionView.EmptyView>
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
