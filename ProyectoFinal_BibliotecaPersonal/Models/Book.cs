@@ -29,7 +29,7 @@ namespace ProyectoFinal_BibliotecaPersonal.Models
 
         public bool IsRead { get; set; }
 
-        public int Rating { get; set; } // 1-5 estrellas
+        public int Rating { get; set; }
 
         [MaxLength(1000)]
         public string Notes { get; set; } = string.Empty;

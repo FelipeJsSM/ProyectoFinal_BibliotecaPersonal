@@ -2,11 +2,54 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinal_BibliotecaPersonal.Views.AddBookPage"
-             Title="AddBookPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Agregar Nuevo Libro">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Título del Libro" Style="{StaticResource CaptionStyle}"/>
+            <Entry Text="{Binding Book.Title}" Style="{StaticResource StandardEntryStyle}" Placeholder="Ej. Cien años de soledad"/>
+
+            <Label Text="Autor" Style="{StaticResource CaptionStyle}"/>
+            <Entry Text="{Binding Book.Author}" Style="{StaticResource StandardEntryStyle}" Placeholder="Ej. Gabriel García Márquez"/>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Año" Style="{StaticResource CaptionStyle}"/>
+                    <Entry Text="{Binding Book.Year}" Keyboard="Numeric" Style="{StaticResource StandardEntryStyle}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Páginas" Style="{StaticResource CaptionStyle}"/>
+                    <Entry Text="{Binding Book.Pages}" Keyboard="Numeric" Style="{StaticResource StandardEntryStyle}"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Label Text="Género" Style="{StaticResource CaptionStyle}"/>
+            <Entry Text="{Binding Book.Genre}" Style="{StaticResource StandardEntryStyle}" Placeholder="Ej. Ficción, Ciencia..."/>
+
+            <Label Text="ISBN" Style="{StaticResource CaptionStyle}"/>
+            <Entry Text="{Binding Book.ISBN}" Style="{StaticResource StandardEntryStyle}" Placeholder="Opcional"/>
+
+            <Label Text="URL de la Portada" Style="{StaticResource CaptionStyle}"/>
+            <Entry Text="{Binding Book.CoverUrl}" Style="{StaticResource StandardEntryStyle}" Placeholder="http://..."/>
+
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                <CheckBox IsChecked="{Binding Book.IsRead}" Color="{DynamicResource PrimaryColor}"/>
+                <Label Text="Ya leí este libro" VerticalOptions="Center" TextColor="{DynamicResource TextColor}"/>
+            </HorizontalStackLayout>
+
+            <Label Text="{Binding Source={x:Reference RatingSlider}, Path=Value, StringFormat='Calificación: {0:F0} estrellas'}" Style="{StaticResource CaptionStyle}" Margin="0,10,0,0"/>
+            <Slider x:Name="RatingSlider" Minimum="1" Maximum="5" Value="{Binding Book.Rating}" MinimumTrackColor="{DynamicResource PrimaryColor}" />
+
+            <Label Text="Mis Notas" Style="{StaticResource CaptionStyle}" Margin="0,10,0,0"/>
+            <Editor Text="{Binding Book.Notes}" HeightRequest="100" BackgroundColor="{DynamicResource SurfaceColor}" TextColor="{DynamicResource TextColor}"/>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,20,0,20">
+                <Button Grid.Column="0" Text="Guardar" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButtonStyle}" />
+                <Button Grid.Column="1" Text="Cancelar" Command="{Binding CancelCommand}" Style="{StaticResource SecondaryButtonStyle}" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
